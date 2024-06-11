@@ -1,0 +1,24 @@
+{
+   
+    "@id":"dtmi:housegen:House;1",
+    "@context":"dtmi:dtdl:context;3",
+    "@type":"Interface",
+    "displayName": "House",
+    "contents": [
+        {
+            "@type": "Property",
+            "name": "Name",
+            "schema": "string"
+        },
+        {
+            "@type": "Property",
+            "name": "Address",
+            "schema": "string"
+        },
+        {
+            "@type": "Relationship",
+            "name": "rooms",
+            "target": "dtmi:housegen:Room"
+        }
+    ]
+}
