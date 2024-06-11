@@ -8,11 +8,13 @@
         {
             "@type": "Property",
             "name": "Name",
+            "writable": true,
             "schema": "string"
         },
         {
             "@type": "Property",
             "name": "Address",
+            "writable": true,
             "schema": "string"
         },
         {
