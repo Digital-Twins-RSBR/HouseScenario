@@ -10,7 +10,7 @@
       "schema": "double"
     },
     {
-      "@type": "Property",
+      "@type": ["Property","Causal"],
       "name": "status",
       "schema": "boolean"
     }
