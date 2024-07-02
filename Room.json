@@ -12,9 +12,10 @@
       "unit": "squareFoot"
     },
     {
-      "@type": "Telemetry",
+      "@type": ["Telemetry","Temperature"],
       "name": "temperature",
-      "schema": "double"
+      "schema": "double",
+      "unit":"degreeCelsius"
     },
     {
       "@type": "Relationship",
