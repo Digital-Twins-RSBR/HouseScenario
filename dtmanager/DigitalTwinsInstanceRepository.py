@@ -1,10 +1,13 @@
 
 from abc import ABC,abstractmethod
+from .DigitalTwinModelRepository import DTDLModel
+import uuid
 class DigitalTwin:
-    def __init__(self,ID,ModelID):
+    def __init__(self,ID,ModelID,Name,attributes=None):
         self.ID=ID
+        self.Name=Name
         self.ModelID=ModelID
-        self.attributes=[]
+        self.attributes=attributes if attributes else []
 class DigitalTwinInstanceManager(ABC):
     def __init__(self,db_connection):
         self.connection=db_connection
@@ -26,3 +29,16 @@ class DigitalTwinInstanceManager(ABC):
     @abstractmethod
     def execute_query(self,query):
         pass
+    def create_from_model(model:DTDLModel)->DigitalTwin:
+
+        id=str(uuid.uuid4())
+        model_id=model.id
+        name=model.name
+        attributes=[]
+        for element in model.modelElements:
+            att={"Type":element.type,"Name":element.name,"Value":"","Schema":element.schema,"Causal":element.isCausal(),"Characteristics":element.supplementTypes}
+            attributes.append(att)
+        dt=DigitalTwin(id,model_id,name,attributes)
+        return dt
+
+        

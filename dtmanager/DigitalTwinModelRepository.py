@@ -40,6 +40,7 @@ class ModelManager:
     def parserDTDLModel(self,specification:DTDLSpecification):
         model=self.parser.parse_specification(specification)
         self.models.append(model)
+        return model
     def getDTDLModel(self,modelID:str) ->Optional[DTDLModel]:
         for model in self.models:
             if modelID==model.id:

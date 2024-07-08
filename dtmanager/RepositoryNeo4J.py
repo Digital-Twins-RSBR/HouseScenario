@@ -22,7 +22,7 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
         super().__init__(db_connection)
     def insert_digital_twin(self,digital_twin):
         query = """
-        CREATE (dt:DigitalTwin {ID: $ID, ModelID: $ModelID})
+        CREATE (dt:DigitalTwin {ID: $ID, ModelID: $ModelID,Name:$Name})
         WITH dt
         UNWIND $attributes AS attr
         CREATE (dt)-[:HAS_ATTRIBUTE]->(a:Attribute {Type: attr.Type, Name: attr.Name,Schema: attr.Schema, Value: attr.Value})
@@ -32,11 +32,12 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
         """
         parameters = {
             'ID': digital_twin.ID,
+            'Name':digital_twin.Name,
             'ModelID': digital_twin.ModelID,
             'attributes': digital_twin.attributes
         }
         self.connection.execute_write(query, parameters)
-    def get_digital_twin(self,ID):
+    def get_digital_twin(self,ID,ModelName):
         query = """
         MATCH (dt:DigitalTwin {ID: $ID})
         OPTIONAL MATCH (dt)-[:HAS_ATTRIBUTE]->(attr:Attribute)
@@ -44,7 +45,7 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
         RETURN dt.ID AS ID, dt.ModelID AS ModelID, 
                collect(DISTINCT attr {Type: attr.Type, Name: attr.Name, Schema: attr.Schema, Value: attr.Value, Characteristics: collect(char.Name)}) AS attributes
         """
-        parameters = {'ID': ID}
+        parameters = {'ID': ID,'Name':ModelName}
         result = self.connection.execute_read(query, parameters)
         if result:
             attributes = result['attributes']
