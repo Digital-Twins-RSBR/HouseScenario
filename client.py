@@ -4,7 +4,7 @@ from dtmanager.RepositoryNeo4J import DigitalTwinsInstaceManagerNeo4j,Neo4jConne
 import json
 # Step 1 - Create Model Manager
 
-parser_endpoint='http://localhost:53192'
+parser_endpoint='http://localhost:5251'
 
 modelRepository=ModelManager(parser_endpoint)
 
@@ -20,7 +20,8 @@ with open("House.json") as file:
 
 model_2=DTDLSpecification(id="dtmi:housegen:House;1",specification=spec_data_house)
 
-modelRepository.parserDTDLModel(model_2)
+parsed_model_house=modelRepository.parserDTDLModel(model_2)
+
 
 with open("LightBulb.json") as file:
     spec_data_lightbulb=json.load(file)
@@ -38,8 +39,31 @@ modelRepository.parserDTDLModel(model_4)
 
 #Configurando o instance manager
 
-connection=Neo4jConnection("bolt://localhost:7687","neo4j","pass")
+connection=Neo4jConnection("bolt://localhost:7687","neo4j","burks123")
 
-digitalTwinManager=DigitalTwinInstanceManager(connection)
+digitalTwinInstanceManager=DigitalTwinsInstaceManagerNeo4j(connection)
 
-#Continuar aqui
+
+# Criando as instâncias
+
+house_1=digitalTwinInstanceManager.create_from_model(modelRepository.getDTDLModel("dtmi:housegen:House;1"))
+
+room_1=digitalTwinInstanceManager.create_from_model(modelRepository.getDTDLModel("dtmi:housegen:Room;1"))
+
+lightbulb_1=digitalTwinInstanceManager.create_from_model(modelRepository.getDTDLModel("dtmi:housegen:LightBulb;1"))
+
+lightbulb_2=digitalTwinInstanceManager.create_from_model(modelRepository.getDTDLModel("dtmi:housegen:LightBulb;1"))
+
+airconditioner_1=digitalTwinInstanceManager.create_from_model(modelRepository.getDTDLModel("dtmi:housegen:AirConditioner;1"))
+
+#Criando os relacionamentos
+
+digitalTwinInstanceManager.create_relationship(from_id=house_1.ID,target_id=room_1.ID,relationship_name="HAS_ROOM")
+
+digitalTwinInstanceManager.create_relationship(from_id=room_1.ID,target_id=lightbulb_1.ID,relationship_name="HAS_LIGHTBULB")
+
+digitalTwinInstanceManager.create_relationship(from_id=room_1.ID,target_id=lightbulb_2.ID,relationship_name="HAS_LIGHTBULB")
+
+digitalTwinInstanceManager.create_relationship(from_id=room_1.ID,target_id=airconditioner_1.ID,relationship_name="HAS_AIRCONDITIONER")
+
+print("Its All Done!!!")

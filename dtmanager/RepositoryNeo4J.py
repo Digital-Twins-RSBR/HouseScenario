@@ -25,7 +25,7 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
         CREATE (dt:DigitalTwin {ID: $ID, ModelID: $ModelID,Name:$Name})
         WITH dt
         UNWIND $attributes AS attr
-        CREATE (dt)-[:HAS_ATTRIBUTE]->(a:Attribute {Type: attr.Type, Name: attr.Name,Schema: attr.Schema, Value: attr.Value})
+        CREATE (dt)-[:HAS_ATTRIBUTE]->(a:Attribute {Type: attr.Type, Name: attr.Name,Schema: attr.Schema, Value: attr.Value, Causal:attr.Causal})
         WITH a, attr
         UNWIND attr.Characteristics AS char
         CREATE (a)-[:HAS_CHARACTERISTIC]->(:Characteristic {Name: char})
@@ -43,7 +43,7 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
         OPTIONAL MATCH (dt)-[:HAS_ATTRIBUTE]->(attr:Attribute)
         OPTIONAL MATCH (attr)-[:HAS_CHARACTERISTIC]->(char:Characteristic)
         RETURN dt.ID AS ID, dt.ModelID AS ModelID, 
-               collect(DISTINCT attr {Type: attr.Type, Name: attr.Name, Schema: attr.Schema, Value: attr.Value, Characteristics: collect(char.Name)}) AS attributes
+               collect(DISTINCT attr {Type: attr.Type, Name: attr.Name, Schema: attr.Schema, Value: attr.Value,Causal: attr.Causal Characteristics: collect(char.Name)}) AS attributes
         """
         parameters = {'ID': ID,'Name':ModelName}
         result = self.connection.execute_read(query, parameters)
@@ -64,6 +64,6 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
         RETURN type(r)
         """ % relationship_name
         parameters = {'from_id': from_id, 'to_id': target_id}
-        self.execute_write(query, parameters)
+        self.connection.execute_write(query, parameters)
     def execute_query(self,query):
         pass
