@@ -4,7 +4,7 @@ from dtmanager.RepositoryNeo4J import DigitalTwinsInstaceManagerNeo4j,Neo4jConne
 import json
 # Step 1 - Create Model Manager
 
-parser_endpoint='http://localhost:5251'
+parser_endpoint='http://localhost:53192'
 
 modelRepository=ModelManager(parser_endpoint)
 
