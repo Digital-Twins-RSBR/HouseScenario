@@ -25,7 +25,7 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
         CREATE (dt:DigitalTwin {ID: $ID, ModelID: $ModelID,Name:$Name})
         WITH dt
         UNWIND $attributes AS attr
-        CREATE (dt)-[:HAS_ATTRIBUTE]->(a:Attribute {Type: attr.Type, Name: attr.Name,Schema: attr.Schema, Value: attr.Value, Causal:attr.Causal})
+        CREATE (dt)-[:HAS_INSTANCEELEMENT]->(a:InstanceElement {Type: attr.Type, Name: attr.Name,Schema: attr.Schema, Value: attr.Value, Causal:attr.Causal})
         WITH a, attr
         UNWIND attr.Characteristics AS char
         CREATE (a)-[:HAS_CHARACTERISTIC]->(:Characteristic {Name: char})
@@ -40,7 +40,7 @@ class DigitalTwinsInstaceManagerNeo4j(DigitalTwinInstanceManager):
     def get_digital_twin(self,ID,ModelName):
         query = """
         MATCH (dt:DigitalTwin {ID: $ID})
-        OPTIONAL MATCH (dt)-[:HAS_ATTRIBUTE]->(attr:Attribute)
+        OPTIONAL MATCH (dt)-[:HAS_INSTANCEELEMENT]->(attr:InstanceElement)
         OPTIONAL MATCH (attr)-[:HAS_CHARACTERISTIC]->(char:Characteristic)
         RETURN dt.ID AS ID, dt.ModelID AS ModelID, 
                collect(DISTINCT attr {Type: attr.Type, Name: attr.Name, Schema: attr.Schema, Value: attr.Value,Causal: attr.Causal Characteristics: collect(char.Name)}) AS attributes
