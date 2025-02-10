@@ -13,7 +13,7 @@
         },
         {
             "@type": "Telemetry",
-            "name": "flowRate",
+            "name": "waterflowRate",
             "schema": "double",
             "displayName": "Flow Rate",
             "description": "The flow rate of the pump in GPM"

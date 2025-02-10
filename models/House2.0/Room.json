@@ -24,14 +24,14 @@
     },
     {
       "@type": "Relationship",
-      "name": "lights",
+      "name": "has_lights",
       "minMultiplicity": 0,
       "maxMultiplicity": 5,
       "target": "dtmi:housegen:LightBulb;1"
     },
     {
       "@type": "Relationship",
-      "name": "airconditioner",
+      "name": "has_airconditioner",
       "minMultiplicity": 0,
       "maxMultiplicity": 1,
       "target": "dtmi:housegen:AirConditioner;1"

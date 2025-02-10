@@ -24,7 +24,7 @@
       },
       {
         "@type": "Relationship",
-        "name": "pump",
+        "name": "has_pump",
         "minMultiplicity": 0,
         "maxMultiplicity": 1,
         "target": "dtmi:housegen:Pump;1"

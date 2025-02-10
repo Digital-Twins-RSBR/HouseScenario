@@ -12,7 +12,7 @@
         },
         {
             "@type":"Relationship",
-            "name":"irrigationSystem",
+            "name":"has_irrigationSystem",
             "target":"dtmi:housegen:Irrigation;1"
         }
     ]
