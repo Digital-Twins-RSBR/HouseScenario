@@ -13,10 +13,10 @@
         },
         {
             "@type": ["Property","Causal"],
-            "name": "isIrrigationOn",
+            "name": "irrigationStatus",
             "schema": "boolean",
-            "displayName": "Is Irrigation On",
-            "description": "Indicates whether the irrigation system is on or off"
+            "displayName": "Set the Irrigation status",
+            "description": "Defines if the irrigation system is ON or OFF"
         }
     ]
 }
