@@ -1,0 +1,127 @@
+Consultas e respostas:
+
+Consulta: MATCH (dt:DigitalTwin {model_name: 'LightBulb1'})-[:HAS_PROPERTY]->(tp:TwinProperty {name: 'status', value: 'true'}) RETURN dt
+Resposta:
+╒══════════════════════════════════════════════════════════════════════╕
+│dt                                                                    │
+╞══════════════════════════════════════════════════════════════════════╡
+│(:DigitalTwin {model_name: "LightBulb1",name: "LightBulb1 - 22",descri│
+│ption: "Digital Twin Instance LightBulb1 - 22"})                      │
+└──────────────────────────────────────────────────────────────────────┘
+[
+  {
+    "keys": [
+      "dt"
+    ],
+    "length": 1,
+    "_fields": [
+      {
+        "identity": {
+          "low": 83,
+          "high": 0
+        },
+        "labels": [
+          "DigitalTwin"
+        ],
+        "properties": {
+          "model_name": "LightBulb1",
+          "name": "LightBulb1 - 22",
+          "description": "Digital Twin Instance LightBulb1 - 22",
+          "dt_id": {
+            "low": 22,
+            "high": 0
+          }
+        },
+        "elementId": "4:714a0de5-214c-4889-b89a-854a008b05e5:83"
+      }
+    ],
+    "_fieldLookup": {
+      "dt": 0
+    }
+  }
+]
+_____________________________________________________________________________________________________________
+
+Consulta: MATCH (dt:DigitalTwin)-[:HAS_PROPERTY]->(tp:TwinProperty {name: 'status', value: 'true'}) RETURN dt
+Resposta:
+╒══════════════════════════════════════════════════════════════════════╕
+│dt                                                                    │
+╞══════════════════════════════════════════════════════════════════════╡
+│(:DigitalTwin {model_name: "LightBulb1",name: "LightBulb1 - 22",descri│
+│ption: "Digital Twin Instance LightBulb1 - 22",dt_id: 22})            │
+└──────────────────────────────────────────────────────────────────────┘
+[
+  {
+    "keys": [
+      "dt"
+    ],
+    "length": 1,
+    "_fields": [
+      {
+        "identity": {
+          "low": 83,
+          "high": 0
+        },
+        "labels": [
+          "DigitalTwin"
+        ],
+        "properties": {
+          "model_name": "LightBulb1",
+          "name": "LightBulb1 - 22",
+          "description": "Digital Twin Instance LightBulb1 - 22",
+          "dt_id": {
+            "low": 22,
+            "high": 0
+          }
+        },
+        "elementId": "4:714a0de5-214c-4889-b89a-854a008b05e5:83"
+      }
+    ],
+    "_fieldLookup": {
+      "dt": 0
+    }
+  }
+]
+
+_____________________________________________________________________________________________________________
+Consulta: MATCH (dt:DigitalTwin {model_name: 'AirConditioner1'})-[:HAS_PROPERTY]->(tp:TwinProperty {name: 'temperature'}) WHERE toFloat(tp.value) < 30 RETURN dt
+╒══════════════════════════════════════════════════════════════════════╕
+│dt                                                                    │
+╞══════════════════════════════════════════════════════════════════════╡
+│(:DigitalTwin {model_name: "AirConditioner1",name: "AirConditioner1 - │
+│26",description: "Digital Twin Instance AirConditioner1 - 26",dt_id: 2│
+│6})                                                                   │
+└──────────────────────────────────────────────────────────────────────┘
+
+[
+  {
+    "keys": [
+      "dt"
+    ],
+    "length": 1,
+    "_fields": [
+      {
+        "identity": {
+          "low": 20,
+          "high": 0
+        },
+        "labels": [
+          "DigitalTwin"
+        ],
+        "properties": {
+          "model_name": "AirConditioner1",
+          "name": "AirConditioner1 - 26",
+          "description": "Digital Twin Instance AirConditioner1 - 26",
+          "dt_id": {
+            "low": 26,
+            "high": 0
+          }
+        },
+        "elementId": "4:714a0de5-214c-4889-b89a-854a008b05e5:20"
+      }
+    ],
+    "_fieldLookup": {
+      "dt": 0
+    }
+  }
+]
