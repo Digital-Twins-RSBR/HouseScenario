@@ -1,0 +1,40 @@
+{
+   
+    "@context":"dtmi:dtdl:context;3",
+    "@id":"dtmi:brazilian_neighbourhood:House;1",
+    "@type":"Interface",
+    "displayName": "House",
+    "contents": [
+        {
+            "@type": "Property",
+            "name": "name",
+            "writable": true,
+            "schema": "string"
+        },
+        {
+            "@type": "Property",
+            "name": "address",
+            "writable": true,
+            "schema": "string"
+        },
+        {
+            "@type": "Relationship",
+            "name": "has_rooms",
+            "target": "dtmi:brazilian_neighbourhood:Room"
+        },
+        {
+            "@type": "Relationship",
+            "name": "has_pool",
+            "minMultiplicity": 0,
+            "maxMultiplicity": 1,
+            "target": "dtmi:brazilian_neighbourhood:Pool"
+        },
+        {
+            "@type": "Relationship",
+            "name": "has_gardens",
+            "minMultiplicity": 0,
+            "maxMultiplicity": 5,
+            "target": "dtmi:brazilian_neighbourhood:Garden"
+        }
+    ]
+}

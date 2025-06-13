@@ -1,0 +1,36 @@
+{
+    "@id": "dtmi:brazilian_neighbourhood:BrazilianNeighbourhood;1",
+    "@type": "Interface",
+    "displayName": "BrazilianNeighbourhood",
+    "extends": "dtmi:digitaltwins:s4city:city:Neighbourhood;1",
+    "description": "A neighbourhood (Brazilian English) is a geographically localised community within a larger city, town, suburb or rural area. A Brazilian neighbourhood is characterized by its unique cultural, social, and economic attributes, often reflecting the diverse heritage and lifestyle of its residents. It may include residential areas, commercial zones, public spaces, and community facilities that contribute to the overall identity and functionality of the neighbourhood.",
+    "contents": [
+    
+            {
+            "@type": "Property",
+            "name": "name",
+            "writable": true,
+            "schema": "string"
+        },
+        {
+            "@type": "Property",
+            "name": "population",
+            "writable": true,
+            "schema": "integer"
+        },
+        {
+            "@type": "Property",
+            "name": "areaSize",
+            "writable": true,
+            "schema": "double"
+        },
+        {
+            "@type": "Relationship",
+            "name": "has_houses",
+            "target": "dtmi:brazilian_neighbourhood:House;1"
+        }
+      
+      
+    ],
+    "@context": "dtmi:dtdl:context;2"
+}
