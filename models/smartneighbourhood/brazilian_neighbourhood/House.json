@@ -4,6 +4,7 @@
     "@id":"dtmi:brazilian_neighbourhood:House;1",
     "@type":"Interface",
     "displayName": "House",
+    "extends": "dtmi:digitaltwins:s4city:city:AdministrativeArea;1",
     "contents": [
         {
             "@type": "Property",
